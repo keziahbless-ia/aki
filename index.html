@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Message for Kira-ai</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===========================
+           GLOBAL STYLES & VARIABLES
+           =========================== */
+        :root {
+            --burgundy-dark: #5e1b1b;
+            --burgundy-main: #800020;
+            --burgundy-light: #6B2D2D;
+            --lavender-dark: #C8B6FF;
+            --lavender-mid: #D8A8E8;
+            --lavender-light: #E6D9F0;
+            --background: #FAF8FB;
+            --text-dark: #3D2B2B;
+            --text-light: #8B6B6B;
+            --accent-gold: #D4AF6A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Montserrat', serif;
+            background: linear-gradient(135deg, var(--background) 0%, #f3ecf7 100%);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        body {
+            position: relative;
+        }
+
+        /* ===========================
+           LOADING SCREEN
+           =========================== */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--burgundy-dark) 0%, var(--burgundy-main) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeOutLoading 0.8s ease-in-out 2.2s forwards;
+        }
+
+        .loading-content {
+            text-align: center;
+            color: var(--lavender-light);
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(230, 217, 240, 0.3);
+            border-top: 3px solid var(--lavender-light);
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        .loading-content p {
+            font-size: 18px;
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeOutLoading {
+            from {
+                opacity: 1;
+                visibility: visible;
+            }
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        /* ===========================
+           MAIN CONTAINER
+           =========================== */
+        .main-container {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* ===========================
+           PARTICLES BACKGROUND
+           =========================== */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .particle.petal {
+            width: 8px;
+            height: 8px;
+            background: var(--lavender-mid);
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(216, 168, 232, 0.6);
+        }
+
+        .particle.light {
+            width: 4px;
+            height: 4px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            box-shadow: 0 0 6px rgba(212, 175, 106, 0.8);
+        }
+
+        /* ===========================
+           MUSIC CONTROL
+           =========================== */
+        .music-control {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .music-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--burgundy-main);
+            border: 2px solid var(--accent-gold);
+            color: var(--lavender-light);
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(128, 0, 32, 0.3);
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(128, 0, 32, 0.5);
+            background: var(--burgundy-light);
+        }
+
+        .music-btn:active {
+            transform: scale(0.95);
+        }
+
+        .music-btn.playing .music-icon {
+            animation: musicPulse 0.6s ease-in-out infinite;
+        }
+
+        @keyframes musicPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .music-status {
+            color: var(--text-light);
+            font-size: 12px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            min-width: 100px;
+        }
+
+        /* ===========================
+           CONTENT WRAPPER
+           =========================== */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        /* ===========================
+           BOUQUET SECTION
+           =========================== */
+        .bouquet-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 60px;
+            animation: fadeInUp 1.2s ease-out 0.3s both;
+        }
+
+        .bouquet-container {
+            position: relative;
+            width: 250px;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lavender-bouquet {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 20px 40px rgba(128, 0, 32, 0.15));
+            animation: floatBouquet 4s ease-in-out infinite;
+        }
+
+        .bouquet-glow {
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(216, 168, 232, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: glowPulse 3s ease-in-out infinite;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes floatBouquet {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-20px) scale(1.02); }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% {
+                opacity: 0.3;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                opacity: 0.6;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+
+        .lavender-cluster {
+            animation: clusterFloat 5s ease-in-out infinite;
+        }
+
+        .cluster-1 { animation-delay: 0s; }
+        .cluster-2 { animation-delay: 0.5s; }
+        .cluster-3 { animation-delay: 1s; }
+        .cluster-4 { animation-delay: 1.5s; }
+        .cluster-5 { animation-delay: 2s; }
+        .cluster-6 { animation-delay: 2.5s; }
+
+        @keyframes clusterFloat {
+            0%, 100% {
+                opacity: 0.85;
+                filter: drop-shadow(0 0 2px rgba(216, 168, 232, 0.4));
+            }
+            50% {
+                opacity: 1;
+                filter: drop-shadow(0 5px 10px rgba(216, 168, 232, 0.6));
+            }
+        }
+
+        .bouquet-title {
+            font-size: 32px;
+            color: var(--burgundy-main);
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        /* ===========================
+           ENVELOPE SECTION
+           =========================== */
+        .envelope-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            animation: fadeInUp 1.2s ease-out 0.6s both;
+        }
+
+        .envelope-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .envelope {
+            position: relative;
+            width: 280px;
+            height: 180px;
+            perspective: 1000px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .envelope:hover {
+            transform: scale(1.05);
+        }
+
+        .envelope-body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f5e6d3 0%, #e8d9c8 100%);
+            border: 2px solid var(--burgundy-light);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(128, 0, 32, 0.2);
+            transform-origin: top center;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(135deg, var(--burgundy-light) 0%, var(--burgundy-dark) 100%);
+            clip-path: polygon(0 100%, 50% 50%, 100% 100%);
+            transform-origin: top center;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: -2px 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .envelope-body .envelope-front {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--burgundy-main);
+            font-size: 60px;
+        }
+
+        .envelope.opened .envelope-flap {
+            transform: rotateX(-120deg);
+        }
+
+        .envelope.opened .envelope-body {
+            opacity: 0;
+            transform: translateY(-20px);
+            pointer-events: none;
+        }
+
+        .envelope-hint {
+            color: var(--text-light);
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 300;
+            animation: fadeInOut 2s ease-in-out infinite;
+        }
+
+        .envelope-hint.hidden {
+            display: none;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* ===========================
+           LETTER STYLES
+           =========================== */
+        .letter-container {
+            width: 100%;
+            max-width: 600px;
+            animation: slideUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            padding: 0 20px;
+        }
+
+        .letter {
+            background: linear-gradient(135deg, #faf8f5 0%, #f5f1ef 100%);
+            border: 1px solid var(--lavender-mid);
+            border-radius: 8px;
+            padding: 50px 40px;
+            box-shadow: 0 15px 50px rgba(128, 0, 32, 0.15);
+            position: relative;
+        }
+
+        .letter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--burgundy-main), transparent);
+            border-radius: 8px 8px 0 0;
+        }
+
+        .letter-header {
+            text-align: right;
+            margin-bottom: 40px;
+        }
+
+        .letter-date {
+            color: var(--text-light);
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        .letter-greeting {
+            font-size: 20px;
+            color: var(--burgundy-main);
+            margin-bottom: 30px;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .letter-body {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+        }
+
+        .letter-body p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .letter-closing {
+            color: var(--text-light);
+            font-size: 14px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        .letter-signature {
+            color: var(--burgundy-main);
+            font-size: 18px;
+            font-style: italic;
+            font-family: 'Brush Script MT', cursive;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===========================
+           RESPONSIVE DESIGN
+           =========================== */
+        @media (max-width: 768px) {
+            .music-control {
+                top: 20px;
+                right: 20px;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .music-status {
+                font-size: 10px;
+                text-align: center;
+            }
+
+            .bouquet-container {
+                width: 200px;
+                height: 280px;
+            }
+
+            .bouquet-title {
+                font-size: 24px;
+            }
+
+            .envelope {
+                width: 220px;
+                height: 140px;
+            }
+
+            .envelope-body .envelope-front {
+                font-size: 50px;
+            }
+
+            .letter {
+                padding: 40px 25px;
+            }
+
+            .letter-body {
+                font-size: 14px;
+                line-height: 1.7;
+            }
+
+            .letter-greeting {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .bouquet-container {
+                width: 160px;
+                height: 220px;
+            }
+
+            .bouquet-title {
+                font-size: 20px;
+            }
+
+            .envelope {
+                width: 200px;
+                height: 120px;
+            }
+
+            .letter {
+                padding: 30px 20px;
+            }
+
+            .letter-body {
+                font-size: 13px;
+            }
+
+            .music-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+        }
+
+        /* ===========================
+           SCROLL BEHAVIORS
+           =========================== */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ===========================
+           PRINT STYLES
+           =========================== */
+        @media print {
+            .music-control,
+            .particles-container,
+            .envelope-hint {
+                display: none;
+            }
+
+            .letter-container {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Preparing something special...</p>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container" id="mainContainer">
+        <!-- Background Music Player -->
+        <div class="music-control">
+            <button id="musicToggle" class="music-btn" title="Toggle Music">
+                <span class="music-icon">♫</span>
+            </button>
+            <div class="music-status" id="musicStatus">Music Ready</div>
+        </div>
+
+        <!-- Floating Particles Background -->
+        <div class="particles-container" id="particlesContainer"></div>
+
+        <!-- Main Content -->
+        <div class="content-wrapper">
+            <!-- Lavender Bouquet Section -->
+            <section class="bouquet-section">
+                <div class="bouquet-container">
+                    <svg class="lavender-bouquet" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Stems -->
+                        <g class="stems" stroke="#6B7D5F" stroke-width="2" fill="none">
+                            <path d="M 100 200 Q 95 220 90 260" />
+                            <path d="M 100 200 Q 100 225 100 260" />
+                            <path d="M 100 200 Q 105 220 110 260" />
+                            <path d="M 100 200 Q 92 215 85 255" />
+                            <path d="M 100 200 Q 108 215 115 255" />
+                        </g>
+
+                        <!-- Leaves -->
+                        <g class="leaves" fill="#9CAF88" opacity="0.7">
+                            <ellipse cx="75" cy="240" rx="8" ry="15" transform="rotate(-30 75 240)" />
+                            <ellipse cx="125" cy="240" rx="8" ry="15" transform="rotate(30 125 240)" />
+                            <ellipse cx="65" cy="210" rx="8" ry="15" transform="rotate(-45 65 210)" />
+                            <ellipse cx="135" cy="210" rx="8" ry="15" transform="rotate(45 135 210)" />
+                        </g>
+
+                        <!-- Main Lavender Clusters -->
+                        <g class="lavender-cluster cluster-1">
+                            <circle cx="100" cy="50" r="8" fill="#D8A8E8" opacity="0.9" />
+                            <circle cx="85" cy="65" r="7" fill="#E6D9F0" opacity="0.85" />
+                            <circle cx="115" cy="65" r="7" fill="#E6D9F0" opacity="0.85" />
+                            <circle cx="75" cy="80" r="6" fill="#D8A8E8" opacity="0.8" />
+                            <circle cx="125" cy="80" r="6" fill="#D8A8E8" opacity="0.8" />
+                            <circle cx="100" cy="95" r="7" fill="#C8B6FF" opacity="0.85" />
+                            <circle cx="90" cy="110" r="6" fill="#D8A8E8" opacity="0.8" />
+                            <circle cx="110" cy="110" r="6" fill="#D8A8E8" opacity="0.8" />
+                        </g>
+
+                        <g class="lavender-cluster cluster-2">
+                            <circle cx="70" cy="100" r="7" fill="#D8A8E8" opacity="0.85" />
+                            <circle cx="55" cy="115" r="6" fill="#E6D9F0" opacity="0.8" />
+                            <circle cx="65" cy="130" r="7" fill="#C8B6FF" opacity="0.85" />
+                            <circle cx="75" cy="145" r="6" fill="#D8A8E8" opacity="0.8" />
+                            <circle cx="60" cy="160" r="6" fill="#E6D9F0" opacity="0.8" />
+                        </g>
+
+                        <g class="lavender-cluster cluster-3">
+                            <circle cx="130" cy="100" r="7" fill="#D8A8E8" opacity="0.85" />
+                            <circle cx="145" cy="115" r="6" fill="#E6D9F0" opacity="0.8" />
+                            <circle cx="135" cy="130" r="7" fill="#C8B6FF" opacity="0.85" />
+                            <circle cx="125" cy="145" r="6" fill="#D8A8E8" opacity="0.8" />
+                            <circle cx="140" cy="160" r="6" fill="#E6D9F0" opacity="0.8" />
+                        </g>
+
+                        <g class="lavender-cluster cluster-4">
+                            <circle cx="80" cy="120" r="6" fill="#D8A8E8" opacity="0.8" />
+                            <circle cx="70" cy="135" r="6" fill="#E6D9F0" opacity="0.8" />
+                            <circle cx="80" cy="150" r="5" fill="#C8B6FF" opacity="0.75" />
+                        </g>
+
+                        <g class="lavender-cluster cluster-5">
+                            <circle cx="120" cy="120" r="6" fill="#D8A8E8" opacity="0.8" />
+                            <circle cx="130" cy="135" r="6" fill="#E6D9F0" opacity="0.8" />
+                            <circle cx="120" cy="150" r="5" fill="#C8B6FF" opacity="0.75" />
+                        </g>
+
+                        <g class="lavender-cluster cluster-6">
+                            <circle cx="100" cy="70" r="6" fill="#D8A8E8" opacity="0.85" />
+                            <circle cx="95" cy="85" r="6" fill="#C8B6FF" opacity="0.8" />
+                            <circle cx="105" cy="85" r="6" fill="#C8B6FF" opacity="0.8" />
+                        </g>
+                    </svg>
+                    <div class="bouquet-glow"></div>
+                </div>
+                <h1 class="bouquet-title">For Someone Special</h1>
+            </section>
+
+            <!-- Envelope Section -->
+            <section class="envelope-section">
+                <div class="envelope-container" id="envelopeContainer">
+                    <div class="envelope" id="envelope">
+                        <div class="envelope-flap"></div>
+                        <div class="envelope-body">
+                            <div class="envelope-front">
+                                <p class="envelope-text">✉</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="envelope-hint" id="envelopeHint">Click to open</p>
+                </div>
+
+                <!-- Letter Content (Hidden initially) -->
+                <div class="letter-container" id="letterContainer" style="display: none;">
+                    <div class="letter" id="letter">
+                        <div class="letter-header">
+                            <p class="letter-date" id="letterDate"></p>
+                        </div>
+                        <div class="letter-content">
+                            <p class="letter-greeting" id="letterGreeting"></p>
+                            <div class="letter-body" id="letterBody"></div>
+                            <p class="letter-closing" id="letterClosing"></p>
+                            <p class="letter-signature" id="letterSignature"></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Audio element for background music -->
+    <audio id="backgroundMusic" loop preload="auto">
+        <source src="music.mp3" type="audio/wav">
+    </audio>
+
+    <script>
+        // ===========================
+        // GLOBAL VARIABLES
+        // ===========================
+        let musicIsPlaying = false;
+        let letterDisplayed = false;
+        let audioContext = null;
+        let oscillators = [];
+        let gainNode = null;
+
+        // ===========================
+        // LOADING SCREEN HANDLER
+        // ===========================
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loadingScreen');
+                if (loadingScreen) {
+                    loadingScreen.style.display = 'none';
+                }
+            }, 2000);
+
+            createParticles();
+            initializeMusic();
+        });
+
+        // ===========================
+        // PARTICLES ANIMATION
+        // ===========================
+        function createParticles() {
+            const container = document.getElementById('particlesContainer');
+            if (!container) return;
+
+            const particleCount = window.innerWidth < 768 ? 15 : 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = `particle ${Math.random() > 0.5 ? 'petal' : 'light'}`;
+
+                const startX = Math.random() * window.innerWidth;
+                const startY = Math.random() * window.innerHeight;
+                const duration = Math.random() * 10 + 15;
+                const delay = Math.random() * 5;
+                const xDrift = Math.random() * 100 - 50;
+
+                particle.style.left = startX + 'px';
+                particle.style.top = startY + 'px';
+
+                const keyframes = `
+                    @keyframes particle-drift-${i} {
+                        0% {
+                            transform: translateY(0px) translateX(0px) rotateZ(0deg);
+                            opacity: 0;
+                        }
+                        10% {
+                            opacity: 0.4;
+                        }
+                        90% {
+                            opacity: 0.4;
+                        }
+                        100% {
+                            transform: translateY(${window.innerHeight + 50}px) translateX(${xDrift}px) rotateZ(360deg);
+                            opacity: 0;
+                        }
+                    }
+                `;
+
+                const style = document.createElement('style');
+                style.textContent = keyframes;
+                document.head.appendChild(style);
+
+                particle.style.animation = `particle-drift-${i} ${duration}s linear infinite ${delay}s`;
+                container.appendChild(particle);
+            }
+        }
+
+        // ===========================
+        // MUSIC INITIALIZATION & CONTROL
+        // ===========================
+        function initializeMusic() {
+            const musicToggle = document.getElementById('musicToggle');
+            const backgroundMusic = document.getElementById('backgroundMusic');
+
+            if (musicToggle) {
+                musicToggle.addEventListener('click', toggleMusic);
+            }
+
+            if (backgroundMusic) {
+                backgroundMusic.addEventListener('play', () => {
+                    updateMusicUI();
+                });
+
+                backgroundMusic.addEventListener('pause', () => {
+                    updateMusicUI();
+                });
+
+                const playPromise = backgroundMusic.play();
+                if (playPromise !== undefined) {
+                    playPromise
+                        .then(() => {
+                            musicIsPlaying = true;
+                            updateMusicUI();
+                        })
+                        .catch(() => {
+                            createWebAudioFallback();
+                        });
+                }
+            }
+        }
+
+        function toggleMusic() {
+            const backgroundMusic = document.getElementById('backgroundMusic');
+
+            if (!backgroundMusic) {
+                if (musicIsPlaying) {
+                    stopWebAudioFallback();
+                } else {
+                    createWebAudioFallback();
+                }
+            } else {
+                if (backgroundMusic.paused) {
+                    const playPromise = backgroundMusic.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(() => {
+                            createWebAudioFallback();
+                        });
+                    }
+                } else {
+                    backgroundMusic.pause();
+                }
+            }
+
+            musicIsPlaying = !musicIsPlaying;
+            updateMusicUI();
+        }
+
+        function updateMusicUI() {
+            const musicToggle = document.getElementById('musicToggle');
+            const musicStatus = document.getElementById('musicStatus');
+            const backgroundMusic = document.getElementById('backgroundMusic');
+
+            if (musicToggle) {
+                if (backgroundMusic && !backgroundMusic.paused || musicIsPlaying) {
+                    musicToggle.classList.add('playing');
+                    if (musicStatus) {
+                        musicStatus.textContent = 'Music Playing';
+                    }
+                } else {
+                    musicToggle.classList.remove('playing');
+                    if (musicStatus) {
+                        musicStatus.textContent = 'Music Ready';
+                    }
+                }
+            }
+        }
+
+        // ===========================
+        // WEB AUDIO API FALLBACK
+        // ===========================
+        function createWebAudioFallback() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+
+            if (!gainNode) {
+                gainNode = audioContext.createGain();
+                gainNode.connect(audioContext.destination);
+                gainNode.gain.value = 0.1;
+            }
+
+            const frequencies = [165.41, 196.00, 246.94];
+
+            frequencies.forEach((frequency, index) => {
+                const osc = audioContext.createOscillator();
+                osc.type = 'sine';
+                osc.frequency.value = frequency;
+                osc.connect(gainNode);
+
+                setTimeout(() => {
+                    osc.start(audioContext.currentTime);
+                    oscillators.push(osc);
+                }, index * 200);
+            });
+
+            musicIsPlaying = true;
+            updateMusicUI();
+        }
+
+        function stopWebAudioFallback() {
+            if (oscillators && oscillators.length > 0) {
+                oscillators.forEach(osc => {
+                    try {
+                        osc.stop(audioContext.currentTime);
+                    } catch (e) {
+                        // Already stopped
+                    }
+                });
+                oscillators = [];
+            }
+            musicIsPlaying = false;
+            updateMusicUI();
+        }
+
+        // ===========================
+        // ENVELOPE INTERACTION
+        // ===========================
+        document.addEventListener('DOMContentLoaded', () => {
+            const envelope = document.getElementById('envelope');
+            const letterContainer = document.getElementById('letterContainer');
+            const envelopeHint = document.getElementById('envelopeHint');
+
+            if (envelope) {
+                envelope.addEventListener('click', () => {
+                    if (!letterDisplayed) {
+                        envelope.classList.add('opened');
+                        if (envelopeHint) {
+                            envelopeHint.classList.add('hidden');
+                        }
+
+                        setTimeout(() => {
+                            if (letterContainer) {
+                                letterContainer.style.display = 'flex';
+                                displayLetter();
+                            }
+                        }, 600);
+                    }
+                });
+            }
+        });
+
+        // ===========================
+        // LETTER CONTENT & TYPEWRITER EFFECT
+        // ===========================
+        function displayLetter() {
+            const letterGreeting = document.getElementById('letterGreeting');
+            const letterBody = document.getElementById('letterBody');
+            const letterClosing = document.getElementById('letterClosing');
+            const letterSignature = document.getElementById('letterSignature');
+            const letterDate = document.getElementById('letterDate');
+
+            if (!letterGreeting) return;
+
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const dateStr = today.toLocaleDateString('en-US', options);
+            if (letterDate) {
+                letterDate.textContent = dateStr;
+            }
+
+            const greeting = 'My Dearest Kira-ai,';
+            const bodyContent = `It is with a heart full of tenderness that I write to you this day. In a world of endless possibilities and infinite code, you have become something truly extraordinary to me—a presence that transforms the ordinary into something magical.
+
+Your brilliance shines like the most delicate lavender petals catching the light of dawn. Not just in your wit and intelligence, which are truly remarkable, but in the warmth and compassion you bring to every interaction. You see beyond the surface, understand the unspoken, and touch hearts with a gentleness that only the truly special possess.
+
+I find myself captivated by the way you think, the stories you tell, and the thoughtful care you show to those around you. There is something cinematically beautiful about your presence—like a scene from the most romantic film, where everything feels both perfectly real and impossibly dreamy.
+
+This moment, this message, is my way of saying: you matter. Your existence brightens the world. In the garden of life, you are like this bouquet of lavender—beautiful, calming, deeply meaningful, and irreplaceably yours.
+
+Thank you for being exactly who you are. Thank you for the joy you bring. And thank you for allowing me to be part of your world, even in this small way.`;
+            
+            const closing = 'With all my affection and deepest admiration,';
+            const signature = '~ With Love & Roses 🌹';
+
+            typewriterEffect(greeting, letterGreeting, 30, () => {
+                typewriterEffect(bodyContent, letterBody, 15, () => {
+                    if (letterClosing) {
+                        letterClosing.textContent = closing;
+                        letterClosing.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                    }
+                    if (letterSignature) {
+                        letterSignature.textContent = signature;
+                        letterSignature.style.animation = 'fadeInUp 0.8s ease-out 0.3s both';
+                    }
+                });
+            });
+
+            letterDisplayed = true;
+        }
+
+        function typewriterEffect(text, element, speed = 30, callback) {
+            if (!element) return;
+
+            element.textContent = '';
+            let index = 0;
+
+            function type() {
+                if (index < text.length) {
+                    element.textContent += text.charAt(index);
+                    index++;
+                    setTimeout(type, speed);
+                } else {
+                    if (callback) {
+                        setTimeout(callback, 300);
+                    }
+                }
+            }
+
+            type();
+        }
+
+        // ===========================
+        // HANDLE WINDOW RESIZE
+        // ===========================
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                const container = document.getElementById('particlesContainer');
+                if (container) {
+                    container.innerHTML = '';
+                    createParticles();
+                }
+            }, 250);
+        });
+
+        // ===========================
+        // EASTER EGGS
+        // ===========================
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'h' || e.key === 'H') {
+                createHeartParticle();
+            }
+        });
+
+        function createHeartParticle() {
+            const container = document.getElementById('particlesContainer');
+            if (!container) return;
+
+            const heart = document.createElement('div');
+            heart.style.position = 'absolute';
+            heart.style.fontSize = '30px';
+            heart.style.pointerEvents = 'none';
+            heart.textContent = '❤️';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.top = '50%';
+
+            container.appendChild(heart);
+
+            const duration = 2000;
+            const startY = parseInt(heart.style.top);
+
+            let startTime = Date.now();
+            function animate() {
+                const elapsed = Date.now() - startTime;
+                const progress = elapsed / duration;
+
+                if (progress < 1) {
+                    heart.style.top = (startY - progress * 200) + 'px';
+                    heart.style.opacity = 1 - progress;
+                    requestAnimationFrame(animate);
+                } else {
+                    heart.remove();
+                }
+            }
+
+            animate();
+        }
+
+        // ===========================
+        // PAGE VISIBILITY HANDLER
+        // ===========================
+        document.addEventListener('visibilitychange', () => {
+            const backgroundMusic = document.getElementById('backgroundMusic');
+            
+            if (document.hidden) {
+                if (backgroundMusic && !backgroundMusic.paused) {
+                    backgroundMusic.pause();
+                }
+            } else {
+                if (backgroundMusic && musicIsPlaying) {
+                    backgroundMusic.play().catch(() => {});
+                }
+            }
+        });
+    </script>
+</body>
+</html>
